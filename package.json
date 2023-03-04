@@ -1,0 +1,24 @@
+{
+  "name": "mbbbroad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkAmdHa/m.git"
+  },
+  "author": "Hamid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarkAmdHa/m/issues"
+  },
+  "homepage": "https://github.com/DarkAmdHa/m#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}

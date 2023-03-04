@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-// const db = require('./DBconnection')
+const db = require('./DBconnection')
 const port = 5000
 
 // #############################################################################
@@ -76,7 +76,7 @@ app.get('/getaQuote.html', (req, res) => {
   res.sendFile(__dirname + 'public/getaQuote.html')
 })
 */
-/*
+
 app.get('/getcomment', (req, res) => {
   var conn = db.getconnection()
   conn.query(
@@ -149,7 +149,7 @@ app.post('/insert', (req, res) => {
     res.end('working')
   })
   conn.end()
-})*/
+})
 
 app.listen(port, () => {
   console.log('ok ok ok')

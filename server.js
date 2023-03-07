@@ -15,7 +15,7 @@ console.log(process.env.CYCLIC_DB)
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.
-/*var options = {
+var options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html', 'css', 'js', 'ico', 'jpg', 'jpeg', 'png', 'svg'],
@@ -40,8 +40,8 @@ app.use('*', (req, res) => {
       params: req.params,
     })
     .end()
-})*/
-
+})
+/*
 app.use(express.static('public'))
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/map', express.static(__dirname + 'public/css'))
@@ -82,7 +82,7 @@ app.get('/services.html', (req, res) => {
 })
 app.get('/getaQuote.html', (req, res) => {
   res.sendFile(__dirname + 'public/getaQuote.html')
-})
+})*/
 
 app.get('/getcomment', async (req, res) => {
   /*var conn = db.getconnection()

@@ -1,12 +1,21 @@
 const express = require('express')
 const app = express()
-const db = require('./DBconnection')
 const port = 5000
+
+require('dotenv').config()
+
+const CyclicDB = require('@cyclic.sh/dynamodb')
+const db = CyclicDB('your-table-name')
+process.env.CYCLIC_DB = 'bright-teal-frockCyclicDB'
+
+const animals = db.collection('animals')
+
+console.log(process.env.CYCLIC_DB)
 
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.
-var options = {
+/*var options = {
   dotfiles: 'ignore',
   etag: false,
   extensions: ['htm', 'html', 'css', 'js', 'ico', 'jpg', 'jpeg', 'png', 'svg'],
@@ -31,9 +40,8 @@ app.use('*', (req, res) => {
       params: req.params,
     })
     .end()
-})
+})*/
 
-/*
 app.use(express.static('public'))
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/map', express.static(__dirname + 'public/css'))
@@ -75,10 +83,9 @@ app.get('/services.html', (req, res) => {
 app.get('/getaQuote.html', (req, res) => {
   res.sendFile(__dirname + 'public/getaQuote.html')
 })
-*/
 
-app.get('/getcomment', (req, res) => {
-  var conn = db.getconnection()
+app.get('/getcomment', async (req, res) => {
+  /*var conn = db.getconnection()
   conn.query(
     'SELECT * FROM comments.comments',
     function (error, results, fields) {
@@ -88,15 +95,30 @@ app.get('/getcomment', (req, res) => {
       res.end(comments)
     }
   )
-  conn.end()
-})
+  conn.end()*/
 
+  // create an item in collection with key "leo"
+  let leo = await animals.set('leo', {
+    type: 'cat',
+    color: 'orange',
+  })
+  console.log(leo)
+  console.log('-----------------------------------------------')
+
+  // get an item at key "leo" from collection animals
+  let item = await animals.get('leo')
+  console.log(item)
+})
+/*
 app.post('/insert', (req, res) => {
   req.on('data', function (data) {
     var content = ''
     content += data
     var conn = db.getconnection()
     var obj = JSON.parse(content)
+    const commentClientId =  obj.clientID
+    const comment =  obj.clientID
+
     const collected = []
     const commentClientsIds = []
     conn.query(
@@ -150,7 +172,7 @@ app.post('/insert', (req, res) => {
   })
   conn.end()
 })
-
+*/
 app.listen(port, () => {
   console.log('ok ok ok')
 })
